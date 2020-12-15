@@ -1,86 +1,44 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
-
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\grid\GridView;
 use yii\widgets\LinkPager;
 
-$this->title = 'Tags List';
+/* @var $this yii\web\View */
+/* @var $searchModel app\modules\sPages\modules\adminPanel\models\TagSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="tag-index">
 
-<head>
-	<style>
-		h1{
-			font-family: 'Poppins', sans-serif;
-			width: 150px;
-			height: 50px;
-		}
+    <h1><?= Html::encode($this->title) ?></h1>
 
-		.head{
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-			padding: 0px 20px;
-			margin-bottom: 20px;
-		}
+    <p>
+        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-		.btn-success{
-			height: 50px;
-			font-size: 25px;
-			padding: 8px;
-		}
-		
-		.btn-success:hover{
-			text-decoration: none;
-		}
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-		.table{
-			padding: 20px 20px;
-		}
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-		.panel-heading{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
+            'id',
+            'title',
+            'slug',
 
-		.links a:hover{
-			text-decoration: none;
-		}
-	</style>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="head">
-		<h1>Tags</h1>
-		<a class="btn-success" href="create">Create</a>
-	</div>
+    <div class="class">
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+        ]); ?>
+    </div>
 
-	<div class="table">
-		<tabel>
-			<?php foreach($models as $model): ?>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<?= $model->title ?>
-						<div class="links">
-							<a href="/admin/tag/update?id=<?= $model->id ?>">Update</a>
-							<a href="/admin/tag/delete?id=<?= $model->id ?>">Delete</a>
-						</div>
-					</div>
-				</div>
-			<?php endforeach; ?>
-		</table>
-
-		<div class="pagination" align="center">
-			<?= LinkPager::widget([
- 				'pagination' => $tags,
-			]); ?>
-		</div>
-	</div>
-</body>
+</div>

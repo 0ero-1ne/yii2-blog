@@ -1,43 +1,46 @@
 <?php
 
 namespace app\modules\sPages\modules\adminPanel\models;
+
 use Yii;
 
-class Tag extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+/**
+ * This is the model class for table "tag".
+ *
+ * @property int $id
+ * @property string|null $title
+ * @property string|null $slug
+ */
+class Tag extends \yii\db\ActiveRecord
 {
-    
-    public static function tableName(){
-        return '{{tag}}';
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'tag';
     }
 
-    public static function findIdentity($id)
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
     {
-        return static::findOne($id);
-    }
-    
-    public function getId()
-    {
-        return $this->id;   
-    }
-    
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-    
+        return [
+            [['title', 'slug'], 'string', 'max' => 255],
+            [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
+        ];
     }
 
-    public function getAuthKey()
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
     {
-        
+        return [
+            'id' => 'ID',
+            'title' => 'Title',
+            'slug' => 'Slug',
+        ];
     }
-
-    public function validateAuthKey($authKey)
-    {
-        
-    }
-
-    public function create()
-    {
-        return $this->save(false);
-    }
-
 }
