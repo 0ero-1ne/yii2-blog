@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\sPages\modules\adminPanel\models\TagSearch */
@@ -34,11 +33,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-    <div class="class">
-        <?= LinkPager::widget([
-            'pagination' => $pages,
-        ]); ?>
-    </div>
 
 </div>

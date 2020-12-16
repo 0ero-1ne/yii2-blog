@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\sPages\modules\adminPanel;
+namespace app\modules\sPages\modules\admin;
 
 /**
  * admin-panel module definition class
@@ -13,7 +13,7 @@ class Module extends \yii\base\Module
      */
 
     public $layout = '/admin';
-    public $controllerNamespace = 'app\modules\sPages\modules\adminPanel\controllers';
+    public $controllerNamespace = 'app\modules\sPages\modules\admin\controllers';
 
 
     public function init()

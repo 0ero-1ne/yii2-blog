@@ -12,10 +12,10 @@ $config = [
             'class' => 'app\modules\sPages\Module',
         ],
         'admin' => [
-            'class' => 'app\modules\sPages\modules\adminPanel\Module',
+            'class' => 'app\modules\sPages\modules\admin\Module',
         ],
-        'pages' => [
-            'class' => 'app\modules\sPages\modules\pages\Module',
+        'page' => [
+            'class' => 'app\modules\sPages\modules\page\Module',
         ],
     ],
     'aliases' => [
@@ -58,7 +58,23 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'suffix' => '.html',
             'rules' => [
+                [
+                    'pattern' => 'tags',
+                    'route' => 'admin/tag',
+                    'suffix' => '.php',
+                ],
+                [
+                    'pattern' => 'articles',
+                    'route' => 'admin/article',
+                    'suffix' => '.php',
+                ],
+                [
+                    'pattern' => 'categories',
+                    'route' => 'admin/category',
+                    'suffix' => '.php',
+                ],
             ],
         ],
         
