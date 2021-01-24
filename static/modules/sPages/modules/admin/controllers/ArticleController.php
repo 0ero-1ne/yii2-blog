@@ -1,10 +1,10 @@
 <?php
-
 namespace app\modules\sPages\modules\admin\controllers;
 
 use Yii;
-use app\modules\sPages\modules\admin\models\Article;
-use app\modules\sPages\modules\admin\models\ArticleSearch;
+use app\modules\sPages\models\Article;
+use app\modules\sPages\models\ArticleSearch;
+use app\modules\sPages\models\ArticleTag;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -82,8 +82,27 @@ class ArticleController extends Controller
 
         $model = new Article();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $tags = $model->tag_id;
+
+            $model->tag_id = 0;
+            $date = date("Y-m-d H:i:s");
+            $model->date_create = $date;
+            $model->date_update = $date;
+
+            if($model->save()){
+                $article = $model->id;
+                
+                foreach ($tags as $tag) {
+                    $art_tag = new ArticleTag();
+                    $art_tag->article_id = $article;
+                    $art_tag->tag_id = $tag;
+                    $art_tag->save();
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);    
+            }
+            
         }
 
         return $this->render('create', [
@@ -107,8 +126,28 @@ class ArticleController extends Controller
 
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $tags = $model->tag_id;
+
+            $model->tag_id = 0;
+            $date = date("Y-m-d H:i:s");
+            $model->date_update = $date;
+
+            if ($model->save()) {
+
+                $article = $model->id;
+
+                ArticleTag::deleteAll(['article_id' => $article]);
+
+                foreach ($tags as $tag) {
+                    $art_tag = new ArticleTag();
+                    $art_tag->article_id = $article;
+                    $art_tag->tag_id = $tag;
+                    $art_tag->save();
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

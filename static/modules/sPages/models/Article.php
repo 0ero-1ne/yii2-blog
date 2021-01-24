@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\sPages\modules\admin\models;
+namespace app\modules\sPages\models;
 
 use Yii;
 
@@ -36,9 +36,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','author','status','content','short_content','date_create','date_update','tag_id','category_id','raiting','slug'],'required'],
+            [['title','author','status','content','short_content','tag_id','category_id','raiting','slug'],'required'],
             [['category_id', 'tag_id', 'raiting'], 'integer'],
-            [['date_create', 'date_update'], 'safe'],
+            [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
+            //[['date_create','date_update'], 'date', 'format' => 'php:d-m-Y H:i:s'],
+            //[['date_create','date_update'], 'default', 'value' => date('d-m-Y H:i:s')],
             [['content', 'short_content'], 'string'],
             [['title', 'slug', 'author', 'status'], 'string', 'max' => 255],
         ];

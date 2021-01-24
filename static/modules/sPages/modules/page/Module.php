@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\sPages\modules\pages;
+namespace app\modules\sPages\modules\page;
 
 /**
  * pages module definition class
@@ -10,7 +10,8 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\sPages\modules\pages\controllers';
+    public $controllerNamespace = 'app\modules\sPages\modules\page\controllers';
+    public $layout = "/page";
 
     /**
      * {@inheritdoc}

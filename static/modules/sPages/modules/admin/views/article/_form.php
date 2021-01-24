@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\modules\sPages\models\Tag;
+use app\modules\sPages\models\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\sPages\modules\adminPanel\models\Article */
@@ -21,9 +24,26 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'author', ['inputOptions' => ['id' => 'article-author']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id', ['inputOptions' => ['id' => 'article-category']])->textInput() ?>
+    <?php
+        $categories = Category::find()->all();
+        $items = ArrayHelper::map($categories,'id','title');
+        $options = [
+            'prompt' => 'Select category...',
+        ];
+    ?>
 
-    <?= $form->field($model, 'tag_id', ['inputOptions' => ['id' => 'article-tags']])->textInput() ?>
+    <?= $form->field($model, 'category_id', ['inputOptions' => ['id' => 'article-category']])->dropDownList($items, $options) ?>
+
+    <?php
+        $tags = Tag::find()->all();
+        $items = ArrayHelper::map($tags,'id','title');
+        $options = [
+            'multiple' => 'multiple',
+            'size' => '10',
+        ];
+    ?>
+
+    <?= $form->field($model, 'tag_id', ['inputOptions' => ['id' => 'article-tags']])->dropDownList($items, $options) ?>
 
     <!-- $form->field($model, 'date_create', ['inputOptions' => ['id' => 'article-date_create']])->textInput() -->
 
@@ -44,9 +64,9 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'status', ['inputOptions' => ['id' => 'category-status']])->dropDownList($items, $params) ?>
 
-    <?= $form->field($model, 'short_content', ['inputOptions' => ['id' => 'article-short_content']])->textarea(['rows' => 2]) ?>
+    <?= $form->field($model, 'short_content', ['inputOptions' => ['id' => 'article-short_content']])->textarea(['rows' => 4]) ?>
 
-    <?= $form->field($model, 'content', ['inputOptions' => ['id' => 'article-content']])->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content', ['inputOptions' => ['id' => 'article-content']])->textarea(['rows' => 8]) ?>
 
     <?= $form->field($model, 'raiting', ['inputOptions' => ['id' => 'article-raiting']])->textInput() ?>
 

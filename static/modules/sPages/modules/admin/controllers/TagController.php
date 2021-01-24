@@ -3,8 +3,8 @@
 namespace app\modules\sPages\modules\admin\controllers;
 
 use Yii;
-use app\modules\sPages\modules\admin\models\Tag;
-use app\modules\sPages\modules\admin\models\TagSearch;
+use app\modules\sPages\models\Tag;
+use app\modules\sPages\models\TagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

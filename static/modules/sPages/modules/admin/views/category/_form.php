@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\modules\sPages\models\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\sPages\modules\adminPanel\models\Category */
@@ -17,7 +19,18 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'title', ['inputOptions' => ['id' => 'category-title']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_parent', ['inputOptions' => ['id' => 'category-id-parent']])->textInput() ?>
+    <?php
+        $categories = Category::find()->where(['id_parent' => -1])->all();
+        $items = [
+            -1 => 'Make it as parent category...',
+        ];
+        $items += ArrayHelper::map($categories, 'id', 'title');
+        $options = [
+            'prompt' => 'Select parent category...'
+        ];
+    ?>
+
+    <?= $form->field($model, 'id_parent', ['inputOptions' => ['id' => 'category-id-parent']])->dropDownList($items, $options) ?>
 
     <?= $form->field($model, 'slug', ['inputOptions' => ['id' => 'category-slug']])->textInput(['maxlength' => true]) ?>
 

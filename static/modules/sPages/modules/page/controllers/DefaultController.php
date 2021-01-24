@@ -1,8 +1,10 @@
 <?php
 
-namespace app\modules\sPages\modules\pages\controllers;
+namespace app\modules\sPages\modules\page\controllers;
 
 use yii\web\Controller;
+
+use app\modules\sPages\models\Article;
 
 /**
  * Default controller for the `pages` module
@@ -15,6 +17,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect('/list-of-articles.html');
     }
 }

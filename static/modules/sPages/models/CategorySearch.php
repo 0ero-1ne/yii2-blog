@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\sPages\modules\admin\models;
+namespace app\modules\sPages\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\sPages\modules\admin\models\Category;
+use app\modules\sPages\models\Category;
 
 /**
  * CategorySearch represents the model behind the search form of `app\modules\sPages\modules\adminPanel\models\Category`.

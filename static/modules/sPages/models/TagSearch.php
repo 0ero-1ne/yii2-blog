@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\sPages\modules\admin\models;
+namespace app\modules\sPages\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\sPages\modules\admin\models\Article;
+use app\modules\sPages\models\Tag;
 
 /**
- * ArticleSearch represents the model behind the search form of `app\modules\sPages\modules\adminPanel\models\Article`.
+ * TagSearch represents the model behind the search form of `app\modules\sPages\modules\adminPanel\models\Tag`.
  */
-class ArticleSearch extends Article
+class TagSearch extends Tag
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ArticleSearch extends Article
     public function rules()
     {
         return [
-            [['id', 'category_id', 'tag_id', 'raiting'], 'integer'],
-            [['title', 'slug', 'author', 'date_create', 'date_update', 'status', 'content', 'short_content'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'slug'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ArticleSearch extends Article
      */
     public function search($params)
     {
-        $query = Article::find();
+        $query = Tag::find();
 
         // add conditions that should always apply here
 
@@ -59,19 +59,10 @@ class ArticleSearch extends Article
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
-            'tag_id' => $this->tag_id,
-            'date_create' => $this->date_create,
-            'date_update' => $this->date_update,
-            'raiting' => $this->raiting,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'author', $this->author])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'short_content', $this->short_content]);
+            ->andFilterWhere(['like', 'slug', $this->slug]);
 
         return $dataProvider;
     }
