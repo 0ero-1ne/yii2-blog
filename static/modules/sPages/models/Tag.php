@@ -30,6 +30,8 @@ class Tag extends \yii\db\ActiveRecord
             [['title','slug'],'required'],
             [['title', 'slug'], 'string', 'max' => 255],
             [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
+            ['title','unique','targetClass' => 'app\modules\sPages\models\Tag'],
+            ['slug','unique','targetClass' => 'app\modules\sPages\models\Tag'],
         ];
     }
 

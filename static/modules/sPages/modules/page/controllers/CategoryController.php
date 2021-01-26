@@ -48,10 +48,10 @@ class CategoryController extends \yii\web\Controller
     		$query->orderBy(['date_create' => SORT_ASC]);
     	} else if ($sort == "-date_create") {
     		$query->orderBy(['date_create' => SORT_DESC]);
-    	} else if ($sort == "raiting") {
-    		$query->orderBy(['raiting' => SORT_ASC]);
-    	} else if ($sort == "-raiting") {
-    		$query->orderBy(['raiting' => SORT_DESC]);
+    	} else if ($sort == "rating") {
+    		$query->orderBy(['rating' => SORT_ASC]);
+    	} else if ($sort == "-rating") {
+    		$query->orderBy(['rating' => SORT_DESC]);
     	} else if ($sort == "date_update") {
     		$query->orderBy(['date_update' => SORT_ASC]);
     	} else if ($sort == "-date_update") {
@@ -59,7 +59,7 @@ class CategoryController extends \yii\web\Controller
     	}
 
 
-    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 1]);
+    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 10]);
     	$models = $query->offset($pages->offset)
         	->limit($pages->limit)
         	->all();

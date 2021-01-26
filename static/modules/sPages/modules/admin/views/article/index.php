@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'content:ntext',
             'short_content:ntext',
-            'raiting',
+            'rating',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

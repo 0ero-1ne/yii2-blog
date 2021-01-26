@@ -33,6 +33,8 @@ class Category extends \yii\db\ActiveRecord
             [['id_parent'], 'integer'],
             [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
             [['title', 'slug', 'status'], 'string', 'max' => 255],
+            ['title','unique','targetClass' => 'app\modules\sPages\models\Category'],
+            ['slug','unique','targetClass' => 'app\modules\sPages\models\Category'],
         ];
     }
 

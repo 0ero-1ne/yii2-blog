@@ -24,7 +24,7 @@ class m201128_100415_create_article_table extends Migration
             'status' => $this->string(),
             'content' => $this->text(),
             'short_content' => $this->text(),
-            'raiting' => $this->integer()
+            'rating' => $this->integer()
         ]);
     }
 

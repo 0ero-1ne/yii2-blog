@@ -68,7 +68,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'content', ['inputOptions' => ['id' => 'article-content']])->textarea(['rows' => 8]) ?>
 
-    <?= $form->field($model, 'raiting', ['inputOptions' => ['id' => 'article-raiting']])->textInput() ?>
+    <?= $form->field($model, 'rating', ['inputOptions' => ['id' => 'article-rating']])->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

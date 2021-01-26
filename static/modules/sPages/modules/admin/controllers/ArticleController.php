@@ -90,19 +90,23 @@ class ArticleController extends Controller
             $model->date_create = $date;
             $model->date_update = $date;
 
-            if($model->save()){
-                $article = $model->id;
-                
-                foreach ($tags as $tag) {
-                    $art_tag = new ArticleTag();
-                    $art_tag->article_id = $article;
-                    $art_tag->tag_id = $tag;
-                    $art_tag->save();
-                }
+            if (empty($tags)) {
+                Yii::$app->getSession()->setFlash('error','
+You have not selected tags!');
+            } else{
+                if($model->save()){
+                    $article = $model->id;
+                    
+                    foreach ($tags as $tag) {
+                        $art_tag = new ArticleTag();
+                        $art_tag->article_id = $article;
+                        $art_tag->tag_id = $tag;
+                        $art_tag->save();
+                    }
 
-                return $this->redirect(['view', 'id' => $model->id]);    
-            }
-            
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }            
         }
 
         return $this->render('create', [
@@ -133,21 +137,25 @@ class ArticleController extends Controller
             $date = date("Y-m-d H:i:s");
             $model->date_update = $date;
 
-            if ($model->save()) {
+            if (empty($tags)) {
+                Yii::$app->getSession()->setFlash('error','
+You have not selected tags!');
+            } else{
+                if ($model->save()) {
+                    ArticleTag::deleteAll(['article_id' => $model->id]);
 
-                $article = $model->id;
+                    foreach ($tags as $tag) {
+                        $art_tag = new ArticleTag();
+                        $art_tag->article_id = $model->id;
+                        $art_tag->tag_id = $tag;
+                        $art_tag->save();
+                    }
 
-                ArticleTag::deleteAll(['article_id' => $article]);
-
-                foreach ($tags as $tag) {
-                    $art_tag = new ArticleTag();
-                    $art_tag->article_id = $article;
-                    $art_tag->tag_id = $tag;
-                    $art_tag->save();
-                }
-
-                return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }    
             }
+
+            
         }
 
         return $this->render('update', [

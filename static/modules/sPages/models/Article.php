@@ -18,7 +18,7 @@ use Yii;
  * @property string|null $status
  * @property string|null $content
  * @property string|null $short_content
- * @property int|null $raiting
+ * @property int|null $rating
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -36,13 +36,15 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','author','status','content','short_content','tag_id','category_id','raiting','slug'],'required'],
-            [['category_id', 'tag_id', 'raiting'], 'integer'],
+            [['title','author','status','content','short_content','tag_id','category_id','rating','slug'],'required'],
+            [['category_id', 'tag_id', 'rating'], 'integer'],
             [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
             //[['date_create','date_update'], 'date', 'format' => 'php:d-m-Y H:i:s'],
             //[['date_create','date_update'], 'default', 'value' => date('d-m-Y H:i:s')],
             [['content', 'short_content'], 'string'],
             [['title', 'slug', 'author', 'status'], 'string', 'max' => 255],
+            ['title','unique','targetClass' => 'app\modules\sPages\models\Article'],
+            ['slug','unique','targetClass' => 'app\modules\sPages\models\Article'],
         ];
     }
 
@@ -63,7 +65,7 @@ class Article extends \yii\db\ActiveRecord
             'status' => 'Status',
             'content' => 'Content',
             'short_content' => 'Short Content',
-            'raiting' => 'Raiting',
+            'rating' => 'Rating',
         ];
     }
 }

@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'short_content') ?>
 
-    <?php // echo $form->field($model, 'raiting') ?>
+    <?php // echo $form->field($model, 'rating') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -10,18 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <head>
-	<style>
-		.article_link{
-			font-size: 25px;
-			color: black;
-		}
-
-		.article_link:hover{
-			text-decoration: none;
-			color: #1f6155;
-			transition-duration: 0.5s;
-		}
-	</style>
+	
 </head>
 
 <div class="pages_of_tag">
@@ -43,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
 								echo "$article->short_content"; 
 								echo "<p align='right'>$article->date_create</p>";
+								echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
 			        		echo "</div>";
 		        		echo "</div>";
 		        	}
@@ -55,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
 								echo "$article->short_content"; 
 								echo "<p align='right'>$article->date_create</p>";
+								echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
 			        		echo "</div>";
 		        		echo "</div>";
 		            }
@@ -67,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
 								echo "$article->short_content"; 
 								echo "<p align='right'>$article->date_create</p>";
+								echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
 			        		echo "</div>";
 		        		echo "</div>";
 		        	}

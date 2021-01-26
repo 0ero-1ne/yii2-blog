@@ -4,6 +4,7 @@ namespace app\modules\sPages\modules\page\controllers;
 use Yii;
 use app\modules\sPages\models\Article;
 use app\modules\sPages\models\Tag;
+use app\modules\sPages\models\Marks;
 use app\modules\sPages\models\ArticleTag;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -68,6 +69,29 @@ class ArticleController extends \yii\web\Controller
 
     public function actionSaveMark($mark, $ip, $article_id)
     {
-        echo "$mark<br />$ip<br />$article_id";
+        $findMark = Marks::findOne(['ip_addr' => $ip, 'article_id' => $article_id]);
+        $article = Article::findOne(['id' => $article_id]);
+
+        if (!$findMark) {
+            $newMark = new Marks();
+            $newMark->ip_addr = $ip;
+            $newMark->mark = $mark;
+            $newMark->article_id = $article_id;
+            $newMark->save();
+        }
+
+        $allMarks = Marks::find()->where(['article_id' => $article_id])->all();
+        $averageMark = 0;
+        $q = 0;
+
+        for ($i = 0; $i < count($allMarks); $i++) {
+            $averageMark += $allMarks[$i]->mark;
+            $q++;
+        }
+
+        $endMark = intval(round($averageMark / $q));
+        $article->rating = $endMark;
+        $article->save();
     }
+
 }
