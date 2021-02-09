@@ -39,7 +39,14 @@ class CategoryController extends \yii\web\Controller
     	$id_parent = $parentCategory->id;
     	$items = Category::find()->where(['id_parent' => $id_parent])->orderBy('title')->all(); //list of subcategories
 
-    	$query = Article::find()->where(['category_id' => $id_parent]);
+        if (Yii::$app->user->isGuest) {
+            $query = Article::find()->where(['status' => 'guest'])->andWhere(['category_id' => $id_parent]);
+        } else if (Yii::$app->user->id == "101") {
+            $query = Article::find()->where(['status' => 'guest'])->orWhere(['status' => 'user'])->andWhere(['category_id' => $id_parent]);
+        } else if (Yii::$app->user->id == "100") {
+            $query = Article::find()->where(['status' => 'guest'])->orWhere(['status' => 'user'])->orWhere(['status' => 'admin'])->andWhere(['category_id' => $id_parent]);
+        }
+
     	if ($sort == "title") {
     		$query->orderBy(['title' => SORT_ASC]);
     	} else if ($sort == "-title") {
@@ -59,7 +66,7 @@ class CategoryController extends \yii\web\Controller
     	}
 
 
-    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 10]);
+    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 1]);
     	$models = $query->offset($pages->offset)
         	->limit($pages->limit)
         	->all();

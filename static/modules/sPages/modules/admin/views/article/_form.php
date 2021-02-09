@@ -43,7 +43,7 @@ use yii\helpers\ArrayHelper;
         ];
     ?>
 
-    <?= $form->field($model, 'tag_id', ['inputOptions' => ['id' => 'article-tags']])->dropDownList($items, $options) ?>
+    <?= $form->field($model, 'number_of_tags', ['inputOptions' => ['id' => 'article-tags']])->dropDownList($items, $options) ?>
 
     <!-- $form->field($model, 'date_create', ['inputOptions' => ['id' => 'article-date_create']])->textInput() -->
 
@@ -62,7 +62,7 @@ use yii\helpers\ArrayHelper;
         ];
     ?>
 
-    <?= $form->field($model, 'status', ['inputOptions' => ['id' => 'category-status']])->dropDownList($items, $params) ?>
+    <?= $form->field($model, 'status', ['inputOptions' => ['id' => 'article-status']])->dropDownList($items, $params) ?>
 
     <?= $form->field($model, 'short_content', ['inputOptions' => ['id' => 'article-short_content']])->textarea(['rows' => 4]) ?>
 

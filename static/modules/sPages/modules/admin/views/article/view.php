@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'slug',
             'author',
             'category_id',
-            'tag_id',
+            'number_of_tags',
             'date_create',
             'date_update',
             'status',

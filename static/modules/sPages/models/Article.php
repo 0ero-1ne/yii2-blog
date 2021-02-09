@@ -36,8 +36,8 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','author','status','content','short_content','tag_id','category_id','rating','slug'],'required'],
-            [['category_id', 'tag_id', 'rating'], 'integer'],
+            [['title','author','status','content','short_content','number_of_tags','category_id','rating','slug'],'required'],
+            [['category_id', 'number_of_tags', 'rating'], 'integer'],
             [['slug'],'match','pattern' => '/^[a-zA-Z0-9-]+$/'],
             //[['date_create','date_update'], 'date', 'format' => 'php:d-m-Y H:i:s'],
             //[['date_create','date_update'], 'default', 'value' => date('d-m-Y H:i:s')],
@@ -59,7 +59,7 @@ class Article extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'author' => 'Author',
             'category_id' => 'Category ID',
-            'tag_id' => 'Tag ID',
+            'number_of_tags' => 'Tags',
             'date_create' => 'Date Create',
             'date_update' => 'Date Update',
             'status' => 'Status',

@@ -18,7 +18,7 @@ class m201128_100415_create_article_table extends Migration
             'slug' => $this->string(),
             'author' => $this->string(),
             'category_id' => $this->integer(),
-            'tag_id' => $this->integer(),
+            'number_of_tags' => $this->integer(),
             'date_create' => $this->dateTime(),
             'date_update' => $this->dateTime(),
             'status' => $this->string(),

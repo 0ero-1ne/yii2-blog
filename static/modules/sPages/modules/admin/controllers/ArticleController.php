@@ -83,9 +83,9 @@ class ArticleController extends Controller
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post())) {
-            $tags = $model->tag_id;
+            $tags = $model->number_of_tags;
 
-            $model->tag_id = 0;
+            $model->number_of_tags = count($tags);
             $date = date("Y-m-d H:i:s");
             $model->date_create = $date;
             $model->date_update = $date;
@@ -131,9 +131,9 @@ You have not selected tags!');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $tags = $model->tag_id;
+            $tags = $model->number_of_tags;
 
-            $model->tag_id = 0;
+            $model->number_of_tags = count($tags);
             $date = date("Y-m-d H:i:s");
             $model->date_update = $date;
 

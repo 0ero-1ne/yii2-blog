@@ -92,51 +92,18 @@ $this->params['breadcrumbs'][] = $this->title;
 			$article = Article::findOne(['id' => $model->id]);
 			$status = $article->status;
 			$q = 0;
-
-			if (Yii::$app->user->isGuest) {
-	            if ($status == "guest") {
-	            	echo "<div class='panel panel-default'>";
-		            	echo "<div class='panel-heading'>";
-			                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
-							echo "$article->short_content"; 
-							echo "<p align='right'>$article->date_create</p>";
-							echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
-		        		echo "</div>";
-	        		echo "</div>";
-	        		$q++;
-	        	}
-	        }
-
-	        if (Yii::$app->user->id == "101") {
-	            if ($status == "guest" || $status == "user") {
-	      			echo "<div class='panel panel-default'>";
-		            	echo "<div class='panel-heading'>";
-			                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
-							echo "$article->short_content"; 
-							echo "<p align='right'>$article->date_create</p>";
-							echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
-		        		echo "</div>";
-	        		echo "</div>";
-					$q++;
-	            }
-	        }
-
-	        if (Yii::$app->user->id == "100") {
-                if ($status == "guest" || $status == "user" || $status == "admin") {
-	                echo "<div class='panel panel-default'>";
-		            	echo "<div class='panel-heading'>";
-			                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
-							echo "$article->short_content"; 
-							echo "<p align='right'>$article->date_create</p>";
-							echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
-		        		echo "</div>";
-	        		echo "</div>";
-	        		$q++;
-	        	}
-	    	}
+            	
+        	echo "<div class='panel panel-default'>";
+            	echo "<div class='panel-heading'>";
+	                echo "<h3><a class='article_link' href='/page/$article->slug.html'>$article->title</a></h3><br />";
+					echo "$article->short_content"; 
+					echo "<p align='right'>$article->date_create</p>";
+					echo "<p align='right'>Average rating of users: <b>$article->rating</b></p>";
+        		echo "</div>";
+    		echo "</div>";
 		}
 
-		if ($q == 0 || count($models) == 0){
+		if (count($models) == 0){
 			echo "<h3>No articles...</h3>";
 		}
 	?>
