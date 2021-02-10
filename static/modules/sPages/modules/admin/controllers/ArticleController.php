@@ -89,6 +89,7 @@ class ArticleController extends Controller
             $date = date("Y-m-d H:i:s");
             $model->date_create = $date;
             $model->date_update = $date;
+            $status = $model->status;
 
             if (empty($tags)) {
                 Yii::$app->getSession()->setFlash('error','
@@ -101,6 +102,7 @@ You have not selected tags!');
                         $art_tag = new ArticleTag();
                         $art_tag->article_id = $article;
                         $art_tag->tag_id = $tag;
+                        $art_tag->article_status = $status;
                         $art_tag->save();
                     }
 
@@ -136,6 +138,7 @@ You have not selected tags!');
             $model->number_of_tags = count($tags);
             $date = date("Y-m-d H:i:s");
             $model->date_update = $date;
+            $status = $model->status;
 
             if (empty($tags)) {
                 Yii::$app->getSession()->setFlash('error','
@@ -148,6 +151,7 @@ You have not selected tags!');
                         $art_tag = new ArticleTag();
                         $art_tag->article_id = $model->id;
                         $art_tag->tag_id = $tag;
+                        $art_tag->article_status = $status;
                         $art_tag->save();
                     }
 

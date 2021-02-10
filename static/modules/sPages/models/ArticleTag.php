@@ -28,6 +28,7 @@ class ArticleTag extends \yii\db\ActiveRecord
     {
         return [
             [['article_id', 'tag_id'], 'integer'],
+            ['article_status', 'string', 'max' => 255],
         ];
     }
 
@@ -40,6 +41,7 @@ class ArticleTag extends \yii\db\ActiveRecord
             'id' => 'ID',
             'article_id' => 'Article ID',
             'tag_id' => 'Tag ID',
+            'article_status' => 'Article status',
         ];
     }
 }

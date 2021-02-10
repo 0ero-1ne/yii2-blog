@@ -90,10 +90,12 @@ $config = [
                     'route' => 'page/tag',
                     'suffix' => '.php',
                 ],
+                
                 'list-of-articles' => '/page/article/index',
                 'page/<slug:[\w\-_\d]+>' => '/page/article/post',
                 'list-of-tags' => '/page/tag/index',
                 'page/tag/<slug:[\w\-_\d]+>' => '/page/tag/post',
+                'page/tag/<slug:[\w\-_\d]+>/<page:\d+>' => '/page/tag/post',
                 'list-of-categories' => '/page/category/index',
                 'page/category/<slug:[\w\-_\d]+>' => '/page/category/post',//categories
                 'page/category/<slug:[\w\-_\d]+>/<page:\d+>' => '/page/category/post',
