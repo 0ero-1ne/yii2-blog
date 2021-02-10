@@ -35,6 +35,11 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(['pageSize' => 10]);
@@ -53,6 +58,11 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -65,6 +75,11 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -91,6 +106,11 @@ class CategoryController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -111,6 +131,11 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -125,6 +150,11 @@ class CategoryController extends Controller
      */
     protected function findModel($id)
     {
+        if (Yii::$app->user->isGuest || Yii::$app->user->id != '100') {
+            Yii::$app->getSession()->setFlash('error','Where are you trying to get?');
+            return $this->goHome();
+        }
+        
         if (($model = Category::findOne($id)) !== null) {
             return $model;
         }

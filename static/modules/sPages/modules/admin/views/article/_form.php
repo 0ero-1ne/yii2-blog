@@ -18,11 +18,17 @@ use yii\helpers\ArrayHelper;
         'layout' => 'default',
     ]); ?>
 
+    <?= $form->field($model, 'author', ['inputOptions' => ['id' => 'article-author']])->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'title', ['inputOptions' => ['id' => 'article-title']])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'slug', ['inputOptions' => ['id' => 'article-slug']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'author', ['inputOptions' => ['id' => 'article-author']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'content', ['inputOptions' => ['id' => 'article-content']])->textarea(['rows' => 8]) ?>
+
+    <?= $form->field($model, 'short_content', ['inputOptions' => ['id' => 'article-short_content']])->textarea(['rows' => 4]) ?>
+
+    <?= $form->field($model, 'rating', ['inputOptions' => ['id' => 'article-rating']])->textInput() ?>
 
     <?php
         $categories = Category::find()->all();
@@ -52,8 +58,8 @@ use yii\helpers\ArrayHelper;
     <?php
         $items = [
             'guest' => 'Guest',
-            'admin' => 'Admin',
             'user' => 'User',
+            'admin' => 'Admin',
             'link' => 'Link',
         ];
 
@@ -63,12 +69,6 @@ use yii\helpers\ArrayHelper;
     ?>
 
     <?= $form->field($model, 'status', ['inputOptions' => ['id' => 'article-status']])->dropDownList($items, $params) ?>
-
-    <?= $form->field($model, 'short_content', ['inputOptions' => ['id' => 'article-short_content']])->textarea(['rows' => 4]) ?>
-
-    <?= $form->field($model, 'content', ['inputOptions' => ['id' => 'article-content']])->textarea(['rows' => 8]) ?>
-
-    <?= $form->field($model, 'rating', ['inputOptions' => ['id' => 'article-rating']])->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
