@@ -11,4 +11,4 @@ $this->title = 'Page default';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1>Hello, motherfucker!</h1>
+<h1>Hello, User!</h1>

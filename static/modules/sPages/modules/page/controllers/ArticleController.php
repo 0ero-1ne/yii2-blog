@@ -100,6 +100,8 @@ class ArticleController extends \yii\web\Controller
             $model->article_rating = $endMark;
             $model->update(false);
         }
+
+        return $this->goHome();
     }
 
 }

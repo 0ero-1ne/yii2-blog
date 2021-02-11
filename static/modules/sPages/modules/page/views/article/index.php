@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 	</style>
 </head>
+
 <div class="article-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="panel-heading">
 				<h3><a class="article_link" href="/page/<?= $model->slug ?>.html"><?= $model->title ?></a></h2><br />
 				<?= $model->short_content ?>
-				<p align="right"><?= $model->date_create ?></p>
+				<p align="right"><?= $model->date_update ?></p>
 				<p align='right'>Average rating of users: <b><?= $model->rating ?></b></p>	
 			</div>
 		</div>
