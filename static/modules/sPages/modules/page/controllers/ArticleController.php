@@ -91,7 +91,15 @@ class ArticleController extends \yii\web\Controller
 
         $endMark = intval(round($averageMark / $q));
         $article->rating = $endMark;
+
         $article->save();
+
+        $models = ArticleTag::find()->where(['article_id' => $article_id])->all();
+
+        foreach ($models as $model) {
+            $model->article_rating = $endMark;
+            $model->update(false);
+        }
     }
 
 }

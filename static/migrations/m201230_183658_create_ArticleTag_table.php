@@ -16,7 +16,11 @@ class m201230_183658_create_ArticleTag_table extends Migration
             'id' => $this->primaryKey(),
             'article_id' => $this->integer(),
             'tag_id' => $this->integer(),
-            'article_status' => $this->string()
+            'article_status' => $this->string(),
+            'article_title' => $this->string(),
+            'article_datecr' => $this->date(),
+            'article_dateup' => $this->date(),
+            'article_rating' => $this->integer()
         ]);
     }
 

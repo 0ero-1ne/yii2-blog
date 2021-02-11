@@ -66,7 +66,7 @@ class CategoryController extends \yii\web\Controller
     	}
 
 
-    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 1]);
+    	$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 10]);
     	$models = $query->offset($pages->offset)
         	->limit($pages->limit)
         	->all();

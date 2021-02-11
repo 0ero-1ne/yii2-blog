@@ -84,6 +84,8 @@ class ArticleController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $tags = $model->number_of_tags;
+            $title = $model->title;
+            $rating = $model->rating;
 
             $model->number_of_tags = count($tags);
             $date = date("Y-m-d H:i:s");
@@ -103,6 +105,10 @@ You have not selected tags!');
                         $art_tag->article_id = $article;
                         $art_tag->tag_id = $tag;
                         $art_tag->article_status = $status;
+                        $art_tag->article_title = $title;
+                        $art_tag->article_datecr = $date;
+                        $art_tag->article_dateup = $date;
+                        $art_tag->article_rating = $rating;
                         $art_tag->save();
                     }
 
@@ -134,6 +140,9 @@ You have not selected tags!');
 
         if ($model->load(Yii::$app->request->post())) {
             $tags = $model->number_of_tags;
+            $datecr = $model->date_create;
+            $title = $model->title;
+            $rating = $model->rating;
 
             $model->number_of_tags = count($tags);
             $date = date("Y-m-d H:i:s");
@@ -152,6 +161,10 @@ You have not selected tags!');
                         $art_tag->article_id = $model->id;
                         $art_tag->tag_id = $tag;
                         $art_tag->article_status = $status;
+                        $art_tag->article_title = $title;
+                        $art_tag->article_datecr = $datecr;
+                        $art_tag->article_dateup = $date;
+                        $art_tag->article_rating = $rating;
                         $art_tag->save();
                     }
 

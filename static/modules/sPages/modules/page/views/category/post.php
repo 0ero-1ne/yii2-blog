@@ -72,15 +72,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		echo "<span><a class='sort_link' href='?sort=-date_create'>New first</a></span> |";
 		
-		echo " <span><a class='sort_link' href='?sort=date-create'>Old first</a></span> |";
+		echo " <span><a class='sort_link' href='?sort=date_create'>Old first</a></span> |";
 
 		echo " <span><a class='sort_link' href='?sort=title'>Title(A-Z)</a></span> |";
 		
 		echo " <span><a class='sort_link' href='?sort=-title'>Title(Z-A)</a></span> |";
 
-		echo " <span><a class='sort_link' href='?sort=date-update'>Updated articles(Old first)</a></span> |";
+		echo " <span><a class='sort_link' href='?sort=date_update'>Updated articles(Old first)</a></span> |";
 
-		echo " <span><a class='sort_link' href='?sort=-date-update'>Updated articles(New first)</a></span> |";
+		echo " <span><a class='sort_link' href='?sort=-date_update'>Updated articles(New first)</a></span> |";
 
 		echo " <span><a class='sort_link' href='?sort=rating'>Not popular</a></span> |";
 		
