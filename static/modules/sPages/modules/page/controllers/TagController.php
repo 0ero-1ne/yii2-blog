@@ -23,7 +23,7 @@ class TagController extends \yii\web\Controller
         ]);
     }
 
-    public function actionPost($slug, $sort = "title")
+    public function actionPost($slug, $sort = "none")
     {	
     	$tag = Tag::findOne(['slug' => $slug]);
     	$tag_id = $tag->id;

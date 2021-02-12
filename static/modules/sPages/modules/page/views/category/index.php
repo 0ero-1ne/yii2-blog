@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php foreach($models as $model): ?>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a class="category_link" href="/page/category/<?=$model->slug?>.html?sort=title"><?= $model->title ?></a>
+				<a class="category_link" href="/page/category/<?=$model->slug?>.html"><?= $model->title ?></a>
 			</div>
 		</div>
 	<?php endforeach; ?>

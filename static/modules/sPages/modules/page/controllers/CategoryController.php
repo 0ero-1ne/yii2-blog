@@ -33,7 +33,7 @@ class CategoryController extends \yii\web\Controller
         return $this->render('index');
     }
 
-    public function actionPost($slug, $sort = "title")
+    public function actionPost($slug, $sort = "none")
     {
     	$parentCategory = Category::findOne(['slug' => $slug]);
     	$id_parent = $parentCategory->id;
