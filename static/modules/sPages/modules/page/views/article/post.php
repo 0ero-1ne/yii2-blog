@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		  unicode-bidi: bidi-override;
 		  direction: rtl;
 		  text-align: left;
+		  width: 275px;
 		}
 
 		#rating > span {
@@ -82,6 +83,15 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 
 		<?php } else{ ?>
+		#rating > .star-active-notuser:before,
+		#rating > .star-active-notuser ~ .star-active-notuser:before {
+		   content: "\2605";
+		   position: absolute;
+		   left: 0; 
+		   color: gold;
+		   cursor: pointer;
+		}
+
 		#rating > .star-active:before,
 		#rating > .star-active ~ .star-active:before {
 		   content: "\2605";
@@ -127,10 +137,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		#rating > .not-allowed-cursor:hover:before,
 		#rating > .not-allowed-cursor:hover ~ .not-allowed-cursor:before {
 		   cursor: not-allowed;
-		}
-
-		.star-active{
-
 		}
 
 		.not-allowed{
@@ -181,7 +187,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				if ($i > $model->rating) {
 					echo "<span class='star' onclick='articleMark($i)'>☆</span>";	
 				} else{
-					echo "<span class='star star-active' onclick='articleMark($i)'>☆</span>";
+					echo "<span class='star star-active-notuser' onclick='articleMark($i)'>☆</span>";
 				}
 			}
 			echo "</div>";
@@ -191,9 +197,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <script type="text/javascript">
-	var url = "http://static.by/page/article/save-mark.html";
+	var url = "/page/article/save-mark.html";
 	var ip = '<?php echo $ip; ?>';
 	var article_id = '<?= $model->id?>';
+	var stars_i = [];
 
 	function getGoodMessage(){
 		alert("The vote has been accepted");
@@ -203,91 +210,32 @@ $this->params['breadcrumbs'][] = $this->title;
 		alert("The vote hasn't been accepted. Refresh page and try again. If it didn't help you, tell us about your problem!");
 	}
 
+	document.querySelector('#rating').onmouseover = function () {
+		var stars = document.getElementsByClassName("star");
+		for (let i = 0; i < stars.length; i++) {
+			if (stars[i].classList.contains("star-active-notuser") && !stars[i].classList.contains("star-active")) {
+				stars[i].classList.remove("star-active-notuser");
+				stars_i.push(i);
+			}
+		}
+	}
+
+	document.querySelector('#rating').onmouseout = function () {
+		var stars = document.getElementsByClassName("star");
+		for (let i = 0; i < stars.length; i++) {
+			if (stars_i.indexOf(i) != -1) {
+				stars[i].classList.add("star-active-notuser");
+			}
+		}
+	}
+
 	function articleMark(mark){
 		var stars = document.getElementsByClassName("star");
 
 		for (let i = 0; i < stars.length; i++) {
-			if (stars[i].classList.contains("star-active")) {
-				stars[i].classList.remove("star-active")
-				console.log(stars[i]);
+			if (stars[i].classList.contains("star-active-notuser")) {
+				stars[i].classList.remove("star-active-notuser");
 			}
-		}
-
-		if (mark == 1) {
-			stars[4].classList.add("star-active");
-			stars[4].classList.add("not-allowed-cursor");
-			stars[3].classList.add("not-allowed");
-			stars[2].classList.add("not-allowed");
-			stars[1].classList.add("not-allowed");
-			stars[0].classList.add("not-allowed");
-			rating.classList.add("not-allowed");
-			stars[4].removeAttribute("onclick");
-			stars[3].removeAttribute("onclick");
-			stars[2].removeAttribute("onclick");
-			stars[1].removeAttribute("onclick");
-			stars[0].removeAttribute("onclick");
-		} else if (mark == 2) {
-			stars[4].classList.add("star-active");
-			stars[3].classList.add("star-active");
-			stars[4].classList.add("not-allowed-cursor");
-			stars[3].classList.add("not-allowed-cursor");
-			stars[2].classList.add("not-allowed");
-			stars[1].classList.add("not-allowed");
-			stars[0].classList.add("not-allowed");
-			rating.classList.add("not-allowed");
-			stars[4].removeAttribute("onclick");
-			stars[3].removeAttribute("onclick");
-			stars[2].removeAttribute("onclick");
-			stars[1].removeAttribute("onclick");
-			stars[0].removeAttribute("onclick");
-		} else if (mark == 3) {
-			stars[4].classList.add("star-active");
-			stars[3].classList.add("star-active");
-			stars[2].classList.add("star-active");
-			stars[4].classList.add("not-allowed-cursor");
-			stars[3].classList.add("not-allowed-cursor");
-			stars[2].classList.add("not-allowed-cursor");
-			stars[1].classList.add("not-allowed");
-			stars[0].classList.add("not-allowed");
-			rating.classList.add("not-allowed");
-			stars[4].removeAttribute("onclick");
-			stars[3].removeAttribute("onclick");
-			stars[2].removeAttribute("onclick");
-			stars[1].removeAttribute("onclick");
-			stars[0].removeAttribute("onclick");
-		} else if (mark == 4) {
-			stars[4].classList.add("star-active");
-			stars[3].classList.add("star-active");
-			stars[2].classList.add("star-active");
-			stars[1].classList.add("star-active");
-			stars[4].classList.add("not-allowed-cursor");
-			stars[3].classList.add("not-allowed-cursor");
-			stars[2].classList.add("not-allowed-cursor");
-			stars[1].classList.add("not-allowed-cursor");
-			stars[0].classList.add("not-allowed");
-			rating.classList.add("not-allowed");
-			stars[4].removeAttribute("onclick");
-			stars[3].removeAttribute("onclick");
-			stars[2].removeAttribute("onclick");
-			stars[1].removeAttribute("onclick");
-			stars[0].removeAttribute("onclick");
-		} else if (mark == 5) {
-			stars[4].classList.add("star-active");
-			stars[3].classList.add("star-active");
-			stars[2].classList.add("star-active");
-			stars[1].classList.add("star-active");
-			stars[0].classList.add("star-active");
-			stars[4].classList.add("not-allowed-cursor");
-			stars[3].classList.add("not-allowed-cursor");
-			stars[2].classList.add("not-allowed-cursor");
-			stars[1].classList.add("not-allowed-cursor");
-			stars[0].classList.add("not-allowed-cursor");
-			rating.classList.add("not-allowed");
-			stars[4].removeAttribute("onclick");
-			stars[3].removeAttribute("onclick");
-			stars[2].removeAttribute("onclick");
-			stars[1].removeAttribute("onclick");
-			stars[0].removeAttribute("onclick");
 		}
 
 		let xhr = new XMLHttpRequest();
@@ -295,10 +243,84 @@ $this->params['breadcrumbs'][] = $this->title;
 		xhr.onreadystatechange = function(){
 			if (this.readyState === 4 && this.status === 200) {
 				getGoodMessage();
-				console.log(mark);
+				if (mark == 1) {
+					stars[4].classList.add("star-active");
+					stars[4].classList.add("not-allowed-cursor");
+					stars[3].classList.add("not-allowed");
+					stars[2].classList.add("not-allowed");
+					stars[1].classList.add("not-allowed");
+					stars[0].classList.add("not-allowed");
+					rating.classList.add("not-allowed-cursor");
+					stars[4].removeAttribute("onclick");
+					stars[3].removeAttribute("onclick");
+					stars[2].removeAttribute("onclick");
+					stars[1].removeAttribute("onclick");
+					stars[0].removeAttribute("onclick");
+				} else if (mark == 2) {
+					stars[4].classList.add("star-active");
+					stars[3].classList.add("star-active");
+					stars[4].classList.add("not-allowed-cursor");
+					stars[3].classList.add("not-allowed-cursor");
+					stars[2].classList.add("not-allowed");
+					stars[1].classList.add("not-allowed");
+					stars[0].classList.add("not-allowed");
+					rating.classList.add("not-allowed-cursor");
+					stars[4].removeAttribute("onclick");
+					stars[3].removeAttribute("onclick");
+					stars[2].removeAttribute("onclick");
+					stars[1].removeAttribute("onclick");
+					stars[0].removeAttribute("onclick");
+				} else if (mark == 3) {
+					stars[4].classList.add("star-active");
+					stars[3].classList.add("star-active");
+					stars[2].classList.add("star-active");
+					stars[4].classList.add("not-allowed-cursor");
+					stars[3].classList.add("not-allowed-cursor");
+					stars[2].classList.add("not-allowed-cursor");
+					stars[1].classList.add("not-allowed");
+					stars[0].classList.add("not-allowed");
+					rating.classList.add("not-allowed-cursor");
+					stars[4].removeAttribute("onclick");
+					stars[3].removeAttribute("onclick");
+					stars[2].removeAttribute("onclick");
+					stars[1].removeAttribute("onclick");
+					stars[0].removeAttribute("onclick");
+				} else if (mark == 4) {
+					stars[4].classList.add("star-active");
+					stars[3].classList.add("star-active");
+					stars[2].classList.add("star-active");
+					stars[1].classList.add("star-active");
+					stars[4].classList.add("not-allowed-cursor");
+					stars[3].classList.add("not-allowed-cursor");
+					stars[2].classList.add("not-allowed-cursor");
+					stars[1].classList.add("not-allowed-cursor");
+					stars[0].classList.add("not-allowed");
+					rating.classList.add("not-allowed-cursor");
+					stars[4].removeAttribute("onclick");
+					stars[3].removeAttribute("onclick");
+					stars[2].removeAttribute("onclick");
+					stars[1].removeAttribute("onclick");
+					stars[0].removeAttribute("onclick");
+				} else if (mark == 5) {
+					stars[4].classList.add("star-active");
+					stars[3].classList.add("star-active");
+					stars[2].classList.add("star-active");
+					stars[1].classList.add("star-active");
+					stars[0].classList.add("star-active");
+					stars[4].classList.add("not-allowed-cursor");
+					stars[3].classList.add("not-allowed-cursor");
+					stars[2].classList.add("not-allowed-cursor");
+					stars[1].classList.add("not-allowed-cursor");
+					stars[0].classList.add("not-allowed-cursor");
+					rating.classList.add("not-allowed-cursor");
+					stars[4].removeAttribute("onclick");
+					stars[3].removeAttribute("onclick");
+					stars[2].removeAttribute("onclick");
+					stars[1].removeAttribute("onclick");
+					stars[0].removeAttribute("onclick");
+				}
 			} else if (this.readyState === 4 && this.status !== 200) {
 				getBadMessage();
-				console.log(mark);
 			}
 		}
 
