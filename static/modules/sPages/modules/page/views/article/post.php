@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		   position: absolute;
 		   left: 0; 
 		   color: gold;
-		   cursor: pointer;
+		   cursor: not-allowed;
 		}
 
 		#rating > .star-active:hover:before,
@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		   position: absolute;
 		   left: 0; 
 		   color: gold;
-		   cursor: pointer;
+		   cursor: not-allowed;
 		}
 		<?php }?>
 
@@ -223,7 +223,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	document.querySelector('#rating').onmouseout = function () {
 		var stars = document.getElementsByClassName("star");
 		for (let i = 0; i < stars.length; i++) {
-			if (stars_i.indexOf(i) != -1) {
+			if (stars_i.indexOf(i) != -1 && (!stars[i].classList.contains("star-active") && !stars[i].classList.contains("not-allowed"))) {
 				stars[i].classList.add("star-active-notuser");
 			}
 		}
@@ -245,7 +245,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				getGoodMessage();
 				if (mark == 1) {
 					stars[4].classList.add("star-active");
-					stars[4].classList.add("not-allowed-cursor");
 					stars[3].classList.add("not-allowed");
 					stars[2].classList.add("not-allowed");
 					stars[1].classList.add("not-allowed");
@@ -259,8 +258,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				} else if (mark == 2) {
 					stars[4].classList.add("star-active");
 					stars[3].classList.add("star-active");
-					stars[4].classList.add("not-allowed-cursor");
-					stars[3].classList.add("not-allowed-cursor");
 					stars[2].classList.add("not-allowed");
 					stars[1].classList.add("not-allowed");
 					stars[0].classList.add("not-allowed");
@@ -274,9 +271,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					stars[4].classList.add("star-active");
 					stars[3].classList.add("star-active");
 					stars[2].classList.add("star-active");
-					stars[4].classList.add("not-allowed-cursor");
-					stars[3].classList.add("not-allowed-cursor");
-					stars[2].classList.add("not-allowed-cursor");
 					stars[1].classList.add("not-allowed");
 					stars[0].classList.add("not-allowed");
 					rating.classList.add("not-allowed-cursor");
@@ -290,10 +284,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					stars[3].classList.add("star-active");
 					stars[2].classList.add("star-active");
 					stars[1].classList.add("star-active");
-					stars[4].classList.add("not-allowed-cursor");
-					stars[3].classList.add("not-allowed-cursor");
-					stars[2].classList.add("not-allowed-cursor");
-					stars[1].classList.add("not-allowed-cursor");
 					stars[0].classList.add("not-allowed");
 					rating.classList.add("not-allowed-cursor");
 					stars[4].removeAttribute("onclick");
@@ -307,11 +297,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					stars[2].classList.add("star-active");
 					stars[1].classList.add("star-active");
 					stars[0].classList.add("star-active");
-					stars[4].classList.add("not-allowed-cursor");
-					stars[3].classList.add("not-allowed-cursor");
-					stars[2].classList.add("not-allowed-cursor");
-					stars[1].classList.add("not-allowed-cursor");
-					stars[0].classList.add("not-allowed-cursor");
 					rating.classList.add("not-allowed-cursor");
 					stars[4].removeAttribute("onclick");
 					stars[3].removeAttribute("onclick");
